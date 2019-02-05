@@ -26,18 +26,31 @@
         }
     </table>
     <div class="container">
-        <button type="button" class="btn btn-default"><i class="fas fa-angle-double-left"></i>First</button>
-        <button type="button" class="btn btn-default"><i class="fas fa-angle-left"></i>Prev</button>
+        <button type="button" class="btn btn-default">
+            <a href="/page1">
+                <i class="fas fa-angle-double-left"></i>First
+                </a>
+</button>
+        <button type="button" class="btn btn-default">
+            <a href="/page@(Model.PagingInfo.CurrentPage - 1)">
+                <i class="fas fa-angle-left"></i>Prev
+                </a>
+</button>
 
-        <div page-model="@Model.PagingInfo" page-action="List">
-            @Model.PagingInfo.CurrentPage–@(Model.PagingInfo.CurrentPage * @Model.PagingInfo.ItemsPerPage) of @Model.PagingInfo.TotalItems
+        @*<div page-model="@Model.PagingInfo" page-action="List">*@
+            @(Model.PagingInfo.CurrentPage * Model.PagingInfo.ItemsPerPage - Model.PagingInfo.ItemsPerPage + 1)–@(Model.PagingInfo.CurrentPage * Model.PagingInfo.ItemsPerPage) of @Model.PagingInfo.TotalItems
 
-        </div>
-
-
-
-        <button type="button" class="btn btn-default">Next<i class="fas fa-angle-right"></i></button>
-        <button type="button" class="btn btn-default">Last<i class="fas fa-angle-double-right"></i></button>
+        @*</div>*@
+        
+        <button type="button" class="btn btn-default">
+            <a href="/page@(Model.PagingInfo.CurrentPage + 1)">
+            Next<i class="fas fa-angle-right"></i></a>
+        </button>
+        <button type="button" class="btn btn-default">
+            <a href="/page@(Model.PagingInfo.TotalPages)">
+                Last<i class="fas fa-angle-double-right"></i>
+                </a>
+</button>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
