@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -57,6 +58,9 @@
     <Content Remove="wwwroot\js\bootstrap.js.map" />
     <Content Remove="wwwroot\js\bootstrap.min.js" />
     <Content Remove="wwwroot\js\bootstrap.min.js.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Models\ApplicationDBContext.css" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\css\all.css" />
