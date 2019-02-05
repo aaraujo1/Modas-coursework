@@ -1,5 +1,9 @@
-﻿@using Modas.Models
-@model IEnumerable<Event>
+﻿@*using Modas.Models*@
+@using Modas.Models.ViewModels
+
+@*model IEnumerable<Event>*@
+@model EventsListViewModel
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,11 +11,12 @@
     <title>MODAS</title>
     <link href="~/css/all.min.css" rel="stylesheet" />
     <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 <body>
     <table class="container table table-bordered">
         <tr><th>Date</th><th>Time</th><th>Location</th></tr>
-        @foreach (var e in Model)
+        @foreach (var e in Model.Events)
         {
             <tr>
                 <td>@String.Format("{0: ddd, MMM dd, yyyy}", e.TimeStamp)</td>
@@ -20,6 +25,21 @@
             </tr>
         }
     </table>
+    <div class="container">
+        <button type="button" class="btn btn-default"><i class="fas fa-angle-double-left"></i>First</button>
+        <button type="button" class="btn btn-default"><i class="fas fa-angle-left"></i>Prev</button>
+
+        <div page-model="@Model.PagingInfo" page-action="List">
+            @Model.PagingInfo.CurrentPage–@(Model.PagingInfo.CurrentPage * @Model.PagingInfo.ItemsPerPage) of @Model.PagingInfo.TotalItems
+
+        </div>
+
+
+
+        <button type="button" class="btn btn-default">Next<i class="fas fa-angle-right"></i></button>
+        <button type="button" class="btn btn-default">Last<i class="fas fa-angle-double-right"></i></button>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
