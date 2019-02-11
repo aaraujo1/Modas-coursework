@@ -1,0 +1,16 @@
+﻿body {
+
+}
+
+button a {
+    color:white;
+}
+
+button a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.deactivate {
+    pointer-events: none;
+}

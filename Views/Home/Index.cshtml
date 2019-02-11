@@ -12,6 +12,7 @@
     <link href="~/css/all.min.css" rel="stylesheet" />
     <link href="~/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
     <table class="container table table-bordered">
@@ -26,36 +27,77 @@
         }
     </table>
     <div class="container">
-        <button type="button" class="btn btn-default">
-            <a href="/page1">
-                <i class="fas fa-angle-double-left"></i>First
-                </a>
-</button>
-        <button type="button" class="btn btn-default">
-            <a href="/page@(Model.PagingInfo.CurrentPage - 1)">
-                <i class="fas fa-angle-left"></i>Prev
-                </a>
-</button>
+        <div class="row">
+            <div class="col-sm">
+                <button type="button" class="btn btn-primary" id="buttonFirst">
+                    <a href="/page1">
+                        <i class="fas fa-angle-double-left"></i> First
+                    </a>
+                </button>
+                <button type="button" class="btn btn-primary" id="buttonPrev">
+                    <a href="/page@(Model.PagingInfo.CurrentPage - 1)">
+                        <i class="fas fa-angle-left"></i> Prev
+                    </a>
+                </button>
+            </div>
+            <div class="col-sm text-center">
+                @*<div page-model="@Model.PagingInfo" page-action="List">*@
+                @(Model.PagingInfo.CurrentPage * Model.PagingInfo.ItemsPerPage - Model.PagingInfo.ItemsPerPage + 1)–@(Model.PagingInfo.CurrentPage * Model.PagingInfo.ItemsPerPage) of @Model.PagingInfo.TotalItems
 
-        @*<div page-model="@Model.PagingInfo" page-action="List">*@
-            @(Model.PagingInfo.CurrentPage * Model.PagingInfo.ItemsPerPage - Model.PagingInfo.ItemsPerPage + 1)–@(Model.PagingInfo.CurrentPage * Model.PagingInfo.ItemsPerPage) of @Model.PagingInfo.TotalItems
-
-        @*</div>*@
-        
-        <button type="button" class="btn btn-default">
-            <a href="/page@(Model.PagingInfo.CurrentPage + 1)">
-            Next<i class="fas fa-angle-right"></i></a>
-        </button>
-        <button type="button" class="btn btn-default">
-            <a href="/page@(Model.PagingInfo.TotalPages)">
-                Last<i class="fas fa-angle-double-right"></i>
-                </a>
-</button>
+                @*</div>*@
+            </div>
+            <div class="col-sm text-right">
+                <button type="button" class="btn btn-primary" id="buttonNext">
+                    <a href="/page@(Model.PagingInfo.CurrentPage + 1)">
+                        Next <i class="fas fa-angle-right"></i>
+                    </a>
+                </button>
+                <button type="button" class="btn btn-primary" id="buttonLast">
+                    <a href="/page@(Model.PagingInfo.TotalPages)">
+                        Last <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </button>
+            </div>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
     <script src="~/js/bootstrap.min.js"></script>
+
+    @*<script src="~/js/site.js"></script>*@
+    <script>
+
+        function disableFirst(){
+        if(@Model.PagingInfo.CurrentPage == 1){
+                $('#buttonFirst').prop('disabled', true);
+                $('#buttonFirst').addClass('deactivate');
+                $('#buttonPrev').prop('disabled', true);
+                $('#buttonPrev a').addClass('disabled');
+            }else{
+                $('#buttonFirst').prop('disabled', false);
+                $('#buttonPrev').prop('disabled', false);
+            }
+    };
+
+    function disableLast(){
+        if(@Model.PagingInfo.CurrentPage == @Model.PagingInfo.TotalPages){
+                $('#buttonLast').prop('disabled', true);
+                $('#buttonNext').prop('disabled', true);
+            }else{
+                $('#buttonLast').prop('disabled', false);
+                $('#buttonNext').prop('disabled', false);
+            }
+    };
+
+     $(function() {
+        disableFirst();
+        disableLast();
+        // $('#buttonFirst').prop('disabled', true);
+        alert('test');
+    });
+    </script>
+    
 </body>
 </html>
