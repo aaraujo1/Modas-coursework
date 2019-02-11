@@ -28,35 +28,41 @@
     </table>
     <div class="container">
         <div class="row">
-            <div class="col-sm">
-                <button type="button" class="btn btn-primary" id="buttonFirst">
-                    <a href="/page1">
-                        <i class="fas fa-angle-double-left"></i> First
-                    </a>
-                </button>
-                <button type="button" class="btn btn-primary" id="buttonPrev">
-                    <a href="/page@(Model.PagingInfo.CurrentPage - 1)">
-                        <i class="fas fa-angle-left"></i> Prev
-                    </a>
-                </button>
-            </div>
-            <div class="col-sm text-center">
-                @*<div page-model="@Model.PagingInfo" page-action="List">*@
-                @(Model.PagingInfo.CurrentPage * Model.PagingInfo.ItemsPerPage - Model.PagingInfo.ItemsPerPage + 1)–@(Model.PagingInfo.CurrentPage * Model.PagingInfo.ItemsPerPage) of @Model.PagingInfo.TotalItems
+            <div class="col">
+                <button type="button" class="btn btn-outline-secondary" id="buttonFirst"  onclick="location.href='/page@(Model.PagingInfo.CurrentPage - 1)'">
 
-                @*</div>*@
+                    <i class="fas fa-angle-double-left"></i><span class="button-text"> First</span>
+
+</button>
+                <button type="button" class="btn btn-outline-secondary" id="buttonPrev" onclick="location.href='/page@(Model.PagingInfo.CurrentPage - 1)'">
+                    <i class="fas fa-angle-left"></i><span class="button-text"> Prev</span>
+                </button>
             </div>
-            <div class="col-sm text-right">
-                <button type="button" class="btn btn-primary" id="buttonNext">
-                    <a href="/page@(Model.PagingInfo.CurrentPage + 1)">
-                        Next <i class="fas fa-angle-right"></i>
-                    </a>
-                </button>
-                <button type="button" class="btn btn-primary" id="buttonLast">
-                    <a href="/page@(Model.PagingInfo.TotalPages)">
-                        Last <i class="fas fa-angle-double-right"></i>
-                    </a>
-                </button>
+
+            <div class="col text-center">
+                @(Model.PagingInfo.CurrentPage * Model.PagingInfo.ItemsPerPage - Model.PagingInfo.ItemsPerPage + 1)–
+                @if((Model.PagingInfo.CurrentPage * Model.PagingInfo.ItemsPerPage) > Model.PagingInfo.TotalItems){
+                @Model.PagingInfo.TotalItems
+                }
+                else
+                {
+                @(Model.PagingInfo.CurrentPage * Model.PagingInfo.ItemsPerPage)
+                }
+                of @Model.PagingInfo.TotalItems
+            </div>
+
+
+            <div class="col text-right">
+                <button type="button" class="btn btn-outline-secondary" id="buttonNext" onclick="location.href='/page@(Model.PagingInfo.CurrentPage + 1)'">
+
+                    <span class="button-text">Next </span><i class="fas fa-angle-right"></i>
+
+</button>
+                <button type="button" class="btn btn-outline-secondary" id="buttonLast" onclick="location.href='/page@(Model.PagingInfo.TotalPages)'">
+
+                    <span class="button-text">Last </span><i class="fas fa-angle-double-right"></i>
+
+</button>
             </div>
         </div>
     </div>
@@ -72,9 +78,7 @@
         function disableFirst(){
         if(@Model.PagingInfo.CurrentPage == 1){
                 $('#buttonFirst').prop('disabled', true);
-                $('#buttonFirst').addClass('deactivate');
                 $('#buttonPrev').prop('disabled', true);
-                $('#buttonPrev a').addClass('disabled');
             }else{
                 $('#buttonFirst').prop('disabled', false);
                 $('#buttonPrev').prop('disabled', false);
@@ -95,7 +99,7 @@
         disableFirst();
         disableLast();
         // $('#buttonFirst').prop('disabled', true);
-        alert('test');
+        //alert('test');
     });
     </script>
     
