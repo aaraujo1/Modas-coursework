@@ -55,7 +55,7 @@ namespace Modas
 
             app.UseStaticFiles();
             //data
-            SeedData.EnsurePopulated(app);
+            //SeedData.EnsurePopulated(app);
         }
     }
 }
