@@ -21,5 +21,18 @@ namespace Modas.Models
             context.SaveChanges();
             return evt;
         }
+
+        //method to update event
+        public Event UpdateEvent(Event evt)
+        {
+            //look for specific event based on ID
+            //FirstOrDefault returns 1 record or null (not error)
+            Event Event = context.Events.FirstOrDefault(e => e.EventId == evt.EventId);
+            Event.TimeStamp = evt.TimeStamp;
+            Event.Flagged = evt.Flagged;
+            Event.LocationId = evt.LocationId;
+            context.SaveChanges();
+            return Event;
+        }
     }
 }

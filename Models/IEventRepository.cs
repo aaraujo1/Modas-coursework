@@ -6,7 +6,11 @@ namespace Modas.Models
         IQueryable<Event> Events { get; }
         IQueryable<Location> Locations { get; }
 
+        //method to add event
         Event AddEvent(Event evt);
+
+        //method to update event
+        Event UpdateEvent(Event evt);
 
     }
 }
