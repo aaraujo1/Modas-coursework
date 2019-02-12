@@ -12,5 +12,7 @@ namespace Modas.Models
         //method to update event
         Event UpdateEvent(Event evt);
 
+        //method to delete event
+        void DeleteEvent(int eventId);
     }
 }
