@@ -17,10 +17,15 @@
 <body>
     <div class="container">
     <table class="table table-sm table-striped table-shadow">
-        <tr><th>Date</th><th>Time</th><th>Location</th></tr>
+        <tr><th>Flag</th><th>Date</th><th>Time</th><th>Location</th></tr>
         @foreach (var e in Model.Events)
         {
             <tr>
+                <td class="flag">@if(e.Flagged ){
+                    <i class="fas fa-flag"></i>
+                }else{
+                    <i class="far fa-flag"></i>
+                }</td>
                 <td>@String.Format("{0: ddd, MMM dd, yyyy}", e.TimeStamp)</td>
                 <td>@String.Format("{0:hh:mm tt}", e.TimeStamp)</td>
                 <td>@e.Location.Name</td>
@@ -96,11 +101,17 @@
             }
     };
 
+
+
      $(function() {
         disableFirst();
         disableLast();
         // $('#buttonFirst').prop('disabled', true);
         //alert('test');
+
+        $('.flag').on('click', function () {
+                $('i', this).toggleClass("far fa-flag fas fa-flag");
+            });
     });
     </script>
     
