@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Modas.Models;
 
 namespace Modas.Controllers
 {
-    //api/event in controller
     [Route("api/[controller]")]
     public class EventController : Controller
     {
@@ -14,9 +14,13 @@ namespace Modas.Controllers
 
         [HttpGet]
         // returns all events (unsorted)
-        //lazy loading
         public IEnumerable<Event> Get() => repository.Events
             .Include(e => e.Location);
 
+        [HttpGet("{id}")]
+        // return specific event
+        public Event Get(int id) => repository.Events
+            .Include(e => e.Location)
+            .FirstOrDefault(e => e.EventId == id);
     }
 }
