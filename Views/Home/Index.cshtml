@@ -15,7 +15,8 @@
     <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
-    <table class="container table table-bordered">
+    <div class="container">
+    <table class="table table-sm table-striped table-shadow">
         <tr><th>Date</th><th>Time</th><th>Location</th></tr>
         @foreach (var e in Model.Events)
         {
@@ -26,7 +27,7 @@
             </tr>
         }
     </table>
-    <div class="container">
+
         <div class="row">
             <div class="col">
                 <button type="button" class="btn btn-outline-secondary" id="buttonFirst"  onclick="location.href='/page@(Model.PagingInfo.CurrentPage - 1)'">
