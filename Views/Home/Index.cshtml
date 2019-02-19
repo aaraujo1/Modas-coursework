@@ -16,31 +16,35 @@
 </head>
 <body>
     <div class="container">
-    <table class="table table-sm table-striped table-shadow">
-        <tr><th class="text-center">Flag</th><th>Date</th><th>Time</th><th>Location</th></tr>
-        @foreach (var e in Model.Events)
-        {
-        <tr>
-            <td class="flag">@if(e.Flagged ){
-            <i class="fas fa-flag"></i>
-        }else{
-            <i class="far fa-flag"></i>
-        }</td>
-
-            <td>@String.Format("{0: ddd, MMM dd, yyyy}", e.TimeStamp)</td>
-            <td>@String.Format("{0:hh:mm tt}", e.TimeStamp)</td>
-            <td>@e.Location.Name</td>
-        </tr>
+        <table class="table table-sm table-striped table-shadow">
+            <tr><th>Flag</th><th>Date</th><th>Time</th><th>Location</th></tr>
+            @foreach (var e in Model.Events)
+            {
+                <tr>
+                    <td class="flag">
+                        @if (e.Flagged)
+                        {
+                            <i class="fas fa-flag"></i>
+                        }
+                        else
+                        {
+                            <i class="far fa-flag"></i>
+                        }
+                </td>
+                <td>@String.Format("{0: ddd, MMM dd, yyyy}", e.TimeStamp)</td>
+                <td>@String.Format("{0:hh:mm tt}", e.TimeStamp)</td>
+                <td>@e.Location.Name</td>
+            </tr>
         }
-    </table>
+        </table>
 
         <div class="row">
             <div class="col">
-                <button type="button" class="btn btn-outline-secondary" id="buttonFirst"  onclick="location.href='/page@(Model.PagingInfo.CurrentPage - 1)'">
+                <button type="button" class="btn btn-outline-secondary" id="buttonFirst" onclick="location.href='/page@(Model.PagingInfo.CurrentPage - 1)'">
 
                     <i class="fas fa-angle-double-left"></i><span class="button-text"> First</span>
 
-</button>
+                </button>
                 <button type="button" class="btn btn-outline-secondary" id="buttonPrev" onclick="location.href='/page@(Model.PagingInfo.CurrentPage - 1)'">
                     <i class="fas fa-angle-left"></i><span class="button-text"> Prev</span>
                 </button>
@@ -48,12 +52,13 @@
 
             <div class="col text-center">
                 @(Model.PagingInfo.CurrentPage * Model.PagingInfo.ItemsPerPage - Model.PagingInfo.ItemsPerPage + 1)–
-                @if((Model.PagingInfo.CurrentPage * Model.PagingInfo.ItemsPerPage) > Model.PagingInfo.TotalItems){
-                @Model.PagingInfo.TotalItems
+                @if ((Model.PagingInfo.CurrentPage * Model.PagingInfo.ItemsPerPage) > Model.PagingInfo.TotalItems)
+                {
+                    @Model.PagingInfo.TotalItems
                 }
                 else
                 {
-                @(Model.PagingInfo.CurrentPage * Model.PagingInfo.ItemsPerPage)
+                    @(Model.PagingInfo.CurrentPage * Model.PagingInfo.ItemsPerPage)
                 }
                 of @Model.PagingInfo.TotalItems
             </div>
@@ -64,12 +69,12 @@
 
                     <span class="button-text">Next </span><i class="fas fa-angle-right"></i>
 
-</button>
+                </button>
                 <button type="button" class="btn btn-outline-secondary" id="buttonLast" onclick="location.href='/page@(Model.PagingInfo.TotalPages)'">
 
                     <span class="button-text">Last </span><i class="fas fa-angle-double-right"></i>
 
-</button>
+                </button>
             </div>
         </div>
     </div>
@@ -84,21 +89,21 @@
 
         function disableFirst(){
         if(@Model.PagingInfo.CurrentPage == 1){
-                $('#buttonFirst', '#buttonPrev').prop('disabled', true);
-
+                $('#buttonFirst').prop('disabled', true);
+                $('#buttonPrev').prop('disabled', true);
             }else{
-                $('#buttonFirst', '#buttonPrev').prop('disabled', false);
-
+                $('#buttonFirst').prop('disabled', false);
+                $('#buttonPrev').prop('disabled', false);
             }
     };
 
     function disableLast(){
         if(@Model.PagingInfo.CurrentPage == @Model.PagingInfo.TotalPages){
-                $('#buttonLast', '#buttonNext').prop('disabled', true);
-
+                $('#buttonLast').prop('disabled', true);
+                $('#buttonNext').prop('disabled', true);
             }else{
-                $('#buttonLast, '#buttonNext').prop('disabled', false);
-
+                $('#buttonLast').prop('disabled', false);
+                $('#buttonNext').prop('disabled', false);
             }
     };
 
@@ -113,10 +118,8 @@
         $('.flag').on('click', function () {
                 $('i', this).toggleClass("far fa-flag fas fa-flag");
             });
-
-        
     });
     </script>
-    
+
 </body>
 </html>
