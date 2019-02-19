@@ -3,12 +3,14 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Modas.Models;
+using Modas.Models.ViewModels;
 
 namespace Modas.Controllers
 {
     [Route("api/[controller]")]
     public class EventController : Controller
     {
+        private readonly int PageSize = 20;
         private IEventRepository repository;
         public EventController(IEventRepository repo) => repository = repo;
 
@@ -35,6 +37,25 @@ namespace Modas.Controllers
         [HttpPut]
         // update event
         public Event Put([FromBody] Event evt) => repository.UpdateEvent(evt);
+
+
+        [HttpGet("page{page:int}")]
+        // returns all events by page
+        public EventsListViewModel GetPage(int page = 1) =>
+                new EventsListViewModel
+                {
+                    Events = repository.Events.Include(e => e.Location)
+                        .OrderByDescending(e => e.TimeStamp)
+                        .Skip((page - 1) * PageSize)
+                        .Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = repository.Events.Count()
+                    }
+                };
+
 
         [HttpDelete("{id}")]
         // delete event
