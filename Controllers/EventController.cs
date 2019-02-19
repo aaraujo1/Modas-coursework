@@ -41,10 +41,17 @@ namespace Modas.Controllers
 
         [HttpGet("page{page:int}")]
         // returns all events by page
-        public EventsListViewModel GetPage(int page = 1) =>
-                new EventsListViewModel
+        public ApiListViewModel GetPage(int page = 1) =>
+                new ApiListViewModel
                 {
-                    Events = repository.Events.Include(e => e.Location)
+                    Events = repository.Events
+                        .Select(e => new ApiViewEvent
+                        {
+                            EventId = e.EventId,
+                            Flagged = e.Flagged,
+                            TimeStamp = e.TimeStamp,
+                            LocationName = e.Location.Name
+                        })
                         .OrderByDescending(e => e.TimeStamp)
                         .Skip((page - 1) * PageSize)
                         .Take(PageSize),

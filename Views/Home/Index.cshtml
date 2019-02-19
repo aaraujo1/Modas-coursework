@@ -26,9 +26,7 @@
         }else{
             <i class="far fa-flag"></i>
         }</td>
-            @*<td class="text-center">
-            <i data-id="@e.EventId" data-checked="@e.Flagged.ToString().ToLower()" class="@(e.Flagged ? "fas" : "far") fa-flag fa-lg flag"></i>
-        </td>*@
+
             <td>@String.Format("{0: ddd, MMM dd, yyyy}", e.TimeStamp)</td>
             <td>@String.Format("{0:hh:mm tt}", e.TimeStamp)</td>
             <td>@e.Location.Name</td>
@@ -116,16 +114,7 @@
                 $('i', this).toggleClass("far fa-flag fas fa-flag");
             });
 
-        @*$('.flag').on('click', function () {
-                // TODO: AJAX to update database
-                if ($(this).data('checked')) {
-                    $(this).data('checked', false);
-                    $(this).removeClass('fas').addClass('far');
-                } else {
-                    $(this).data('checked', true);
-                    $(this).removeClass('far').addClass('fas');
-                }
-            });*@
+        
     });
     </script>
     
