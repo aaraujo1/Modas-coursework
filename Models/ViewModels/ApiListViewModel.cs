@@ -18,7 +18,7 @@ namespace Modas.Models.ViewModels
         public string LocationName { get; set; }
         */
 
-        /*
+        
     [JsonProperty(PropertyName = "id")]
     public int EventId { get; set; }
     [JsonProperty(PropertyName = "ts")]
@@ -27,8 +27,9 @@ namespace Modas.Models.ViewModels
     public bool Flagged { get; set; }
     [JsonProperty(PropertyName = "loc")]
     public string LocationName { get; set; }
-    */
 
+
+            /*
         [JsonProperty(PropertyName = "")]
         public int EventId { get; set; }
         [JsonProperty(PropertyName = "⏰")]
@@ -37,5 +38,6 @@ namespace Modas.Models.ViewModels
         public bool Flagged { get; set; }
         [JsonProperty(PropertyName = "✆")]
         public string LocationName { get; set; }
+        */       
     }
 }
