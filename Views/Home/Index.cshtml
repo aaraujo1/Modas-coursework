@@ -15,7 +15,15 @@
     <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="container">
+    <!-- navbar -->
+    <nav class="navbar fixed-top navbar-light" style="background-color:#dedede;">
+        <div class="navbar-brand">
+            <i class="fas fa-shield-alt"></i>
+            <span class="d-none d-md-inline" style="font-variant:small-caps;">Moving Object Detection Alert System</span>
+        </div>
+    </nav>
+    <!-- content -->
+    <div class="container m-t-2" style="margin-top:65px;">
         <table class="table table-sm table-striped table-shadow">
             <tr><th>Flag</th><th>Date</th><th>Time</th><th>Location</th></tr>
             @foreach (var e in Model.Events)
@@ -30,12 +38,12 @@
                         {
                             <i class="far fa-flag"></i>
                         }
-                </td>
-                <td>@String.Format("{0: ddd, MMM dd, yyyy}", e.TimeStamp)</td>
-                <td>@String.Format("{0:hh:mm tt}", e.TimeStamp)</td>
-                <td>@e.Location.Name</td>
-            </tr>
-        }
+                    </td>
+                    <td>@String.Format("{0: ddd, MMM dd, yyyy}", e.TimeStamp)</td>
+                    <td>@String.Format("{0:hh:mm tt}", e.TimeStamp)</td>
+                    <td>@e.Location.Name</td>
+                </tr>
+            }
         </table>
 
         <div class="row">
@@ -78,10 +86,14 @@
             </div>
         </div>
     </div>
-
+    <!--
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
+        -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
     <script src="~/js/bootstrap.min.js"></script>
 
     @*<script src="~/js/site.js"></script>*@
