@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Microsoft.AspNetCore.JsonPatch;
 namespace Modas.Models
 {
     public interface IEventRepository
@@ -14,5 +15,7 @@ namespace Modas.Models
 
         //method to delete event
         void DeleteEvent(int eventId);
+
+        void PatchEvent(int id, JsonPatchDocument<Event> patch);
     }
 }

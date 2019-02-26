@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.JsonPatch;
 using Modas.Models;
 using Modas.Models.ViewModels;
 
@@ -62,6 +63,10 @@ namespace Modas.Controllers
                         TotalItems = repository.Events.Count()
                     }
                 };
+
+        [HttpPatch("{id}")]
+        // update event (specific fields)
+        public void Patch(int id, [FromBody]JsonPatchDocument<Event> patch) => repository.PatchEvent(id, patch);
 
 
         [HttpDelete("{id}")]
