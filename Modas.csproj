@@ -22,9 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\css\all.css" />
-    <Content Remove="wwwroot\css\all.min.css" />
-    <Content Remove="wwwroot\webfonts\fa-brands-400.eot" />
     <Content Remove="wwwroot\webfonts\fa-brands-400.svg" />
     <Content Remove="wwwroot\webfonts\fa-brands-400.ttf" />
     <Content Remove="wwwroot\webfonts\fa-brands-400.woff" />
@@ -39,34 +36,16 @@
     <Content Remove="wwwroot\webfonts\fa-solid-900.ttf" />
     <Content Remove="wwwroot\webfonts\fa-solid-900.woff" />
     <Content Remove="wwwroot\webfonts\fa-solid-900.woff2" />
-    <Content Remove="wwwroot\css\bootstrap-grid.css" />
-    <Content Remove="wwwroot\css\bootstrap-grid.css.map" />
-    <Content Remove="wwwroot\css\bootstrap-grid.min.css" />
-    <Content Remove="wwwroot\css\bootstrap-grid.min.css.map" />
-    <Content Remove="wwwroot\css\bootstrap-reboot.css" />
-    <Content Remove="wwwroot\css\bootstrap-reboot.css.map" />
-    <Content Remove="wwwroot\css\bootstrap-reboot.min.css" />
-    <Content Remove="wwwroot\css\bootstrap-reboot.min.css.map" />
-    <Content Remove="wwwroot\css\bootstrap.css" />
-    <Content Remove="wwwroot\css\bootstrap.css.map" />
-    <Content Remove="wwwroot\css\bootstrap.min.css" />
-    <Content Remove="wwwroot\css\bootstrap.min.css.map" />
-    <Content Remove="wwwroot\js\bootstrap.bundle.js" />
-    <Content Remove="wwwroot\js\bootstrap.bundle.js.map" />
-    <Content Remove="wwwroot\js\bootstrap.bundle.min.js" />
     <Content Remove="wwwroot\js\bootstrap.bundle.min.js.map" />
-    <Content Remove="wwwroot\js\bootstrap.js" />
-    <Content Remove="wwwroot\js\bootstrap.js.map" />
     <Content Remove="wwwroot\js\bootstrap.min.js" />
-    <Content Remove="wwwroot\js\bootstrap.min.js.map" />
+    <Content Remove="wwwroot\css\all.css" />
+    <Content Remove="wwwroot\css\bootstrap.css" />
+    <Content Remove="wwwroot\webfonts\fa-brands-400.eot" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Models\ApplicationDBContext.css" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="wwwroot\css\all.css" />
-    <None Include="wwwroot\css\all.min.css" />
-    <None Include="wwwroot\webfonts\fa-brands-400.eot" />
     <None Include="wwwroot\webfonts\fa-brands-400.svg" />
     <None Include="wwwroot\webfonts\fa-brands-400.ttf" />
     <None Include="wwwroot\webfonts\fa-brands-400.woff" />
@@ -81,28 +60,19 @@
     <None Include="wwwroot\webfonts\fa-solid-900.ttf" />
     <None Include="wwwroot\webfonts\fa-solid-900.woff" />
     <None Include="wwwroot\webfonts\fa-solid-900.woff2" />
-    <None Include="wwwroot\css\bootstrap-grid.css" />
-    <None Include="wwwroot\css\bootstrap-grid.css.map" />
-    <None Include="wwwroot\css\bootstrap-grid.min.css" />
-    <None Include="wwwroot\css\bootstrap-grid.min.css.map" />
-    <None Include="wwwroot\css\bootstrap-reboot.css" />
-    <None Include="wwwroot\css\bootstrap-reboot.css.map" />
-    <None Include="wwwroot\css\bootstrap-reboot.min.css" />
-    <None Include="wwwroot\css\bootstrap-reboot.min.css.map" />
-    <None Include="wwwroot\css\bootstrap.css" />
-    <None Include="wwwroot\css\bootstrap.css.map" />
-    <None Include="wwwroot\css\bootstrap.min.css" />
-    <None Include="wwwroot\css\bootstrap.min.css.map" />
-    <None Include="wwwroot\js\bootstrap.bundle.js" />
-    <None Include="wwwroot\js\bootstrap.bundle.js.map" />
-    <None Include="wwwroot\js\bootstrap.bundle.min.js" />
-    <None Include="wwwroot\js\bootstrap.bundle.min.js.map" />
-    <None Include="wwwroot\js\bootstrap.js" />
-    <None Include="wwwroot\js\bootstrap.js.map" />
-    <None Include="wwwroot\js\bootstrap.min.js" />
-    <None Include="wwwroot\js\bootstrap.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\FakeEventRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="wwwroot\js\client.js">
+      <IncludeInPackage>false</IncludeInPackage>
+    </Content>
+    <Content Update="wwwroot\js\site.js">
+      <IncludeInPackage>false</IncludeInPackage>
+    </Content>
+    <Content Update="wwwroot\css\site.css">
+      <IncludeInPackage>false</IncludeInPackage>
+    </Content>
   </ItemGroup>
 </Project>
