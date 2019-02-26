@@ -40,6 +40,7 @@ console.log(response);
                 data: JSON.stringify([{ "op": "replace", "path": "Flagged", "value": checked }]),
                 success: function () {
                     console.log("success");
+                    $('#myToast').toast('show');
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     // log the error to the console
@@ -61,10 +62,15 @@ console.log(response);
             html += "<td class=\"text-center\">";
             html += "<i data-id=\"" + e[i].id + "\" data-checked=\"" + e[i].flag + "\" class=\"" + f + " fa-flag fa-lg flag\" />";
             html += "</td>";
-            html += "<td>" + 
-                "<span class='d-none d-md-block'>" + get_long_date(e[i].ts) + "</span>" + 
-                "<span class='d-md-none'>" + get_short_date(e[i].ts) + "</span>" +
-                "</td>";
+            html += "<td>";
+                html += "<div class=\"d-none d-md-block\">" + get_long_date(e[i].ts) + "</div >";
+                html += "<div class=\"d-md-none\">" + get_short_date(e[i].ts) + "</div >";
+            html += "</td>";
+
+            //html += "<td>" + 
+                //"<span class='d-none d-md-block'>" + get_long_date(e[i].ts) + "</span>" + 
+                //"<span class='d-md-none'>" + get_short_date(e[i].ts) + "</span>" +
+                //"</td>";
             html += "<td>" + get_time(e[i].ts) + "</td>";
             html += "<td>" + e[i].loc + "</td>";
             html += "</tr> ";
