@@ -1,7 +1,26 @@
 ﻿// Turn off ESLint (Windows): Tools - Options - Text Editor - Javascript - Linting
 $(function () {
     var toasts = [];
+    var refreshInterval;
     getEvents(1);
+
+    function refreshEvents() {
+        $.getJSON({
+            url: "../api/event/count",
+            success: function (response, textStatus, jqXhr) {
+                if (response != $('#total').html()) {
+                    console.log("success");
+                    getEvents($('#current').data('val'));
+                    toast("Motion Detected","New motion alert detected!");
+                    $.playSound('/sleighbells.wav');
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                // log the error to the console
+                console.log("The following error occured: " + jqXHR.status, errorThrown);
+            }
+        });
+    }
 
     function getEvents(page) {
         $.getJSON({
@@ -55,6 +74,31 @@ $(function () {
         getEvents($(this).data('page'));
     });
 
+    // event listener to toggle data auto-refresh
+    $('#auto-refresh').on('click', function () {
+        $(this).data('val', !($(this).data('val')));
+        initAutoRefresh();
+    });
+
+    function initAutoRefresh(){
+        // if auto-refresh button is set to true
+        if ($('#auto-refresh').data('val')) {
+            // display checked icon
+            $('#auto-refresh i').removeClass('fa-square').addClass('fa-check-square');
+            $('#auto-refresh').addClass('active');
+            // start timer
+            refreshInterval = setInterval(refreshEvents, 2000);
+        } else {
+            // display unchecked icon
+            $('#auto-refresh i').removeClass('fa-check-square').addClass('fa-square');
+            $('#auto-refresh').removeClass('active');
+            // if the timer is on, clear it
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+            }
+        }
+    }
+
     function toast(header, text, icon){
         // create unique id for toast using array length
         var id = toasts.length;
@@ -106,6 +150,7 @@ $(function () {
         $('#next').data('page', p.nextPage);
         $('#prev').data('page', p.previousPage);
         $('#last').data('page', p.totalPages);
+        $('#current').data('val', p.currentPage);
     }
 
     function initButtons() {

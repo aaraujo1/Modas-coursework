@@ -20,6 +20,11 @@ namespace Modas.Controllers
         public IEnumerable<Event> Get() => repository.Events
             .Include(e => e.Location);
 
+
+        [HttpGet]
+        [Route("count")]
+        public int GetCount() => repository.Events.Count();
+
         [HttpGet("{id}")]
         // return specific event
         public Event Get(int id) => repository.Events
