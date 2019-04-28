@@ -3,6 +3,7 @@ $(function () {
     var toasts = [];
     var refreshInterval;
     getEvents(1);
+    var snd = new Audio("../sleighbells.wav"); // buffers automatically when created
 
     function refreshEvents() {
         $.getJSON({
@@ -11,8 +12,10 @@ $(function () {
                 if (response != $('#total').html()) {
                     console.log("success");
                     getEvents($('#current').data('val'));
-                    toast("Motion Detected","New motion alert detected!");
-                    $.playSound('/sleighbells.wav');
+                    toast("Motion Detected","New motion alert detected!","fas fa-user-secret");
+                    //$.playSound('/sleighbells.wav');
+                    // play sound effect
+                    snd.play();
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
