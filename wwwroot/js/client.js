@@ -121,7 +121,10 @@ $(function () {
         }
         // AJAX to update database
         $.ajax({
-            headers: { "Content-Type": "application/json" },
+            //Add the Authorization header to the Patch request (toggle user flag)
+
+            //headers: { "Content-Type": "application/json" },
+            headers: { "Authorization": 'Bearer ' + Cookies.get("token"), 'Content-Type': 'application/json' },
             url: "../api/event/" + $(this).data('id'),
             type: 'patch',
             data: JSON.stringify([{ "op": "replace", "path": "Flagged", "value": checked }]),
@@ -177,8 +180,21 @@ $(function () {
                         verifyToken();
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
-                            // log the error to the console
+                        //Add additional validation to sign-in process. 
+                        //Assuming the username and password are not empty, the post request is made. 
+                        //However, if either field does not match, a 401 is returned. 
+                        //Use this information to display errors to both fields when appropriate
+
+                        //check for 401 Unauthorized
+                        if (jqXHR.status == 401){
+                        //username and/or password not valid, display errors
+                            errors.push($('#username'));
+                            errors.push($('#password'));
+                            showErrors(errors);
+                        } else {
+                            //log the error to the console
                             console.log("The following error occured: " + jqXHR.status, errorThrown);
+                        }
                     }
                 });
             }
@@ -195,6 +211,15 @@ $(function () {
         $(this).data('val', !($(this).data('val')));
         initAutoRefresh();
     });
+
+    //When the modal sign-in is visible enable the enter keypress (attach the listener to the modal only). 
+    //It should simply simulate (call) the submit button click event
+        $('#signInModal').on('keypress', function (event) {
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == '13'){
+                $('#submitButton').click();
+            }
+        });
 
     function showErrors(errors){
             for (var i = 0; i < errors.length; i++){
