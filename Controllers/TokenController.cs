@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -40,6 +41,13 @@ namespace Modas.Controllers
 
         private string BuildToken(UserModel user)
         {
+            var claims = new[] {
+                    new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName),
+                    new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
+                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                    new Claim(JwtRegisteredClaimNames.Birthdate, user.Birthdate.ToString("yyyy-MM-dd"))
+                };
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
@@ -47,6 +55,9 @@ namespace Modas.Controllers
               // Modify TokenController.cs and remove the Issuer and Audience from the token
               //_config["Jwt:Issuer"],
               //_config["Jwt:Issuer"],
+              null, // issuer
+              null, // audience
+              claims,
               expires: DateTime.Now.AddDays(7),
               signingCredentials: creds);
 
@@ -57,9 +68,12 @@ namespace Modas.Controllers
         {
             UserModel user = null;
 
-            if (login.Username == "andre" && login.Password == "secret")
+            //if (login.Username == "andre" && login.Password == "secret")
+            if ((login.Username).ToLower() == "john" && login.Password == "secret")
             {
-                user = new UserModel { Name = "Andre Araujo", Email = "aaraujo1@my.wctc.edu" };
+                //user = new UserModel { Name = "Andre Araujo", Email = "aaraujo1@my.wctc.edu" };
+                user = new UserModel { FirstName = "John", LastName = "Doe", Email = "john.doe@mail.com" };
+                // BirthDate is deliberately left null
             }
             return user;
         }
@@ -72,7 +86,9 @@ namespace Modas.Controllers
 
         private class UserModel
         {
-            public string Name { get; set; }
+            //public string Name { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
             public string Email { get; set; }
             public DateTime Birthdate { get; set; }
         }
