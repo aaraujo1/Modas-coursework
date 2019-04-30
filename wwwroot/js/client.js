@@ -2,7 +2,16 @@
 $(function () {
     var toasts = [];
     var refreshInterval;
-    getEvents(1);
+
+    //getEvents(1);
+    verifyToken()
+    
+        function verifyToken() {
+            // check for existing token
+            var token = Cookies.get('token');
+            alert(token);
+        }
+
     var snd = new Audio("../sleighbells.wav"); // buffers automatically when created
 
     function refreshEvents() {
